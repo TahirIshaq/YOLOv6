@@ -2,7 +2,6 @@ import os
 from joblib import Parallel, delayed
 from pathlib import Path
 
-
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import numpy as np
@@ -19,7 +18,7 @@ def create_yolov6_dataset_yaml(
     repo root, not relative to prepare_dataset.py
     """
     
-    yaml_file = "./YOLOv6/data/wider_face.yaml"
+    yaml_file = "./data/wider_face.yaml"
     train_images_dir = os.path.abspath(os.path.join(yolo_data_dir, "images", "train"))
     val_images_dir = os.path.abspath(os.path.join(yolo_data_dir, "images", "val"))
     test_images_dir = os.path.abspath(os.path.join(yolo_data_dir, "images", "test"))
@@ -110,12 +109,12 @@ def convert_to_yolov6_format(
 
 
 if __name__ == "__main__":
-    widerface_dataset_path = "./YOLOv6/widerface_data"
+    widerface_dataset_path = "./widerface_data"
 
     (wider_face_train, wider_face_val, wider_face_test) = download_dataset()
 
-    convert_to_yolov6_format(wider_face_train, data_type="train", dst_dir=Path("./widerface_data"))
-    convert_to_yolov6_format(wider_face_val, data_type="val", dst_dir=Path("./widerface_data"))
-    convert_to_yolov6_format(wider_face_test, data_type="test", dst_dir=Path("./widerface_data"))
+    convert_to_yolov6_format(wider_face_train, data_type="train", dst_dir=Path(widerface_dataset_path))
+    convert_to_yolov6_format(wider_face_val, data_type="val", dst_dir=Path(widerface_dataset_path))
+    # convert_to_yolov6_format(wider_face_test, data_type="test", dst_dir=Path(widerface_dataset_path))
 
     create_yolov6_dataset_yaml(widerface_dataset_path)
