@@ -249,8 +249,10 @@ class VarifocalLoss(nn.Module):
 
         weight = alpha * pred_score.pow(gamma) * (1 - label) + gt_score * label
         with torch.amp.autocast('cuda'):
-            loss = (F.binary_cross_entropy(pred_score.float(), gt_score.float(), reduction='none') * weight).sum()
-            # loss = (F.binary_cross_entropy_with_logits(pred_score.float(), gt_score.float(), reduction='none') * weight).sum()
+            try:
+                loss = (F.binary_cross_entropy(pred_score.float(), gt_score.float(), reduction='none') * weight).sum()
+            except RuntimeError:
+                loss = (F.binary_cross_entropy_with_logits(pred_score.float(), gt_score.float(), reduction='none') * weight).sum()
 
         return loss
 
