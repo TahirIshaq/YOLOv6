@@ -114,8 +114,8 @@ if __name__ == "__main__":
 
     (wider_face_train, wider_face_val, wider_face_test) = download_dataset()
 
-    convert_to_yolov6_format(wider_face_val, data_type="train", dst_dir=Path("./widerface_data"))
+    convert_to_yolov6_format(wider_face_train, data_type="train", dst_dir=Path("./widerface_data"))
     convert_to_yolov6_format(wider_face_val, data_type="val", dst_dir=Path("./widerface_data"))
-    convert_to_yolov6_format(wider_face_val, data_type="test", dst_dir=Path("./widerface_data"))
+    convert_to_yolov6_format(wider_face_test, data_type="test", dst_dir=Path("./widerface_data"))
 
     create_yolov6_dataset_yaml(widerface_dataset_path)
